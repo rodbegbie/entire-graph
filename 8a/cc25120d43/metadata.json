@@ -1,0 +1,73 @@
+{
+  "cli_version": "0.12.0",
+  "checkpoint_id": "8acc25120d43",
+  "strategy": "manual-commit",
+  "branch": "fix/345-swift-grammar-refresh",
+  "checkpoints_count": 6,
+  "files_touched": [
+    "NOTICES",
+    "internal/sem/grammars/swift/LICENSE",
+    "internal/sem/grammars/swift/binding.go",
+    "internal/sem/grammars/swift/parser.c",
+    "internal/sem/grammars/swift/scanner.c",
+    "internal/sem/grammars/swift/tree_sitter/alloc.h",
+    "internal/sem/grammars/swift/tree_sitter/array.h",
+    "internal/sem/grammars/swift/tree_sitter/parser.h",
+    "internal/sem/identity_revision_test.go",
+    "internal/sem/parser.go",
+    "internal/sem/provider.go",
+    "internal/sem/swift_test.go",
+    "internal/sem/testdata/fixtures/csharp-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/csharp-fields.ndjson.golden",
+    "internal/sem/testdata/fixtures/csharp-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-async.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-clones.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-fields.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-tests.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-types.ndjson.golden",
+    "internal/sem/testdata/fixtures/java-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/java-fields.ndjson.golden",
+    "internal/sem/testdata/fixtures/java-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/julia-r-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/multilang-relations.ndjson.golden",
+    "internal/sem/testdata/fixtures/php-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/php-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/python-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/python-imports.ndjson.golden",
+    "internal/sem/testdata/fixtures/python-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/rust-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/rust-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/services-config.ndjson.golden",
+    "internal/sem/testdata/fixtures/terraform-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-events.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-fields.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-http.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-imports.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-oo.ndjson.golden"
+  ],
+  "sessions": [
+    {
+      "metadata": "/8a/cc25120d43/0/metadata.json",
+      "transcript": "/8a/cc25120d43/0/full.jsonl",
+      "compact_transcript": "/8a/cc25120d43/0/transcript.jsonl",
+      "content_hash": "/8a/cc25120d43/0/content_hash.txt",
+      "prompt": "/8a/cc25120d43/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 178,
+    "cache_creation_tokens": 86046,
+    "cache_read_tokens": 19609216,
+    "output_tokens": 38092,
+    "api_call_count": 83,
+    "subagent_tokens": {
+      "input_tokens": 0,
+      "cache_creation_tokens": 0,
+      "cache_read_tokens": 0,
+      "output_tokens": 0,
+      "api_call_count": 0
+    }
+  }
+}

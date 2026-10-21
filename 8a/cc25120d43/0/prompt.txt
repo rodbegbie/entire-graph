@@ -1,0 +1,256 @@
+Let's continue our experiment with upgrading the Swift parser used by entire-graph (gh issue #345).  Let's brainstorm changes to the codebase and build process that would make the binary created support Swift 6.
+
+---
+
+A little of both.  I'd like to get a local binary so I can see if it helps, but if I can provide a patch to upstream it might increase the chances of them working on this issue.
+
+---
+
+Yes, fewer complaints from `entire brain doctor`.  This is the current output in ~/build/porter:
+
+
+
+<pasted_content id="2a74">
+ENTIRE_CLI_VERSION=0.12.0
+ENTIRE_REPO_ROOT=/Users/rod/build/porter
+ENTIRE_PLUGIN_CONFIG_DIR=<unset>
+ENTIRE_PLUGIN_DATA_DIR=/Users/rod/.local/share/entire/plugins/data/brain
+ENTIRE_PLUGIN_STATE_DIR=<unset>
+ENTIRE_PLUGIN_CACHE_DIR=<unset>
+plugin config dir: ok (/Users/rod/.config/entire)
+plugin data dir: ok (/Users/rod/.local/share/entire/plugins/data/brain)
+plugin state dir: ok (/Users/rod/.local/state/entire)
+plugin cache dir: ok (/Users/rod/.cache/entire)
+memory_install: ok (found at /opt/homebrew/bin/entire)
+memory_host_adapter: ok (not checked here (not_observable; authority entire-cli): host-adapter install, enablement and trust are owned by the Entire CLI -- verify them with its own integration diagnostics)
+memory_coordinator: ok (idle)
+write_lock: ok (present_unproven; read-only inspection does not probe-acquire the lock; the lock leaf persists after release, so presence alone is normal (see memory_coordinator for liveness))
+memory_provider_egress: ok (config absent; provider ; configured egress none; global policy default; effective disabled)
+memory_schema_capabilities: ok (compiled support: manifest 3, overlay 3, FTS 3, vector 2, abstract 1, jobs 2)
+memory_schemas: ok (manifest observed state current, schema 3, compiled support 3)
+memory_overlay: ok (absent; supported schema 3)
+memory_fts: ok (current; observed schema 3; supported schema 3)
+memory_jobs: ok (current; observed schema 2; supported schema 2)
+memory_vectors: ok (absent; supported schema 2)
+memory_migrations: ok (no derived-state migration findings)
+memory_worker_log: ok (/Users/rod/.local/share/entire/plugins/data/brain/repos/et/rodbegbie/porter/history/work/v1/worker.log (bounded to 1048576 bytes))
+memory_sessions: ok (available; 9 canonical session(s))
+memory_reconciliation: ok (current; last successful 2026-10-18T02:42:14Z)
+manifest: ok (/Users/rod/.local/share/entire/plugins/data/brain/repos/et/rodbegbie/porter)
+capture: ok (9 exported sessions, latest 2026-10-18T02:38:16Z)
+docs_index: ok (168 records from 23 files)
+facts: ok (75 fact(s) across 2 branch(es))
+history_index: ok (0 records (generated 2026-10-18T02:42:14Z))
+history_integrity: ok (index bytes match the manifest content digest)
+history_freshness: ok (history and conversation projections were built from the current exported sessions)
+conversation: warn (0 exchanges (0 incomplete), vectors disabled; sessions exist but produced no exchanges)
+history_fts: ok (BM25 index fresh)
+semantic blind spots: warn (34 data files skipped (minified/bundled): Tests/PorterCoreTests/Fixtures/golden/cheekface.frames.json, Tests/PorterCoreTests/Fixtures/golden/dopamine_xw.frames.json, Tests/PorterCoreTests/Fixtures/golden/imperialteen.frames.json, Tests/PorterCoreTests/Fixtures/golden/pulplive.frames.json, Tests/PorterCoreTests/Fixtures/musicbrainz/cheekface.as-tagged.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/cheekface.picard.json, Tests/PorterCoreTests/Fixtures/musicbrainz/cheekface.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/dc.picard.json, Tests/PorterCoreTests/Fixtures/musicbrainz/dc.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/dopamine_xw.as-tagged.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/dopamine_xw.picard.json, Tests/PorterCoreTests/Fixtures/musicbrainz/dopamine_xw.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/imperialteen.as-tagged.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/imperialteen.picard.json, Tests/PorterCoreTests/Fixtures/musicbrainz/imperialteen.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/now2018.picard.json, Tests/PorterCoreTests/Fixtures/musicbrainz/now2018.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/pulplive.as-tagged.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/pulplive.picard.json, Tests/PorterCoreTests/Fixtures/musicbrainz/pulplive.release.json, Tests/PorterCoreTests/Fixtures/musicbrainz/utada.picard.json, Tests/PorterCoreTests/Fixtures/musicbrainz/utada.release.json, Tests/PorterCoreTests/Fixtures/services/discid-kneecap.json, Tests/PorterCoreTests/Fixtures/services/mb-recording-browse-by-release-532d9b99.json, Tests/PorterCoreTests/Fixtures/services/mb-recording-search-fistymuffs-other-girls-picard-shape.json, Tests/PorterCoreTests/Fixtures/services/mb-recording-search-fistymuffs-other-girls.json, Tests/PorterCoreTests/Fixtures/services/mb-release-lookup-532d9b99-48a8-45af-8552-5f697fe5e8dd-picard-inc.json, Tests/PorterCoreTests/Fixtures/services/mb-release-lookup-a60c6b8c-0e92-413f-8eef-fcd9c0976db8-picard-inc.json, Tests/PorterCoreTests/Fixtures/services/mb-release-lookup-fa3e0e0a-a4c1-409e-929f-b943b31d20fc-picard-inc.json, Tests/PorterCoreTests/Fixtures/services/mb-release-search-cheekface-therapy-island.json, Tests/PorterCoreTests/Fixtures/services/mb-release-search-fistymuffs-about-time.json, Tests/PorterCoreTests/Fixtures/services/mb-release-search-fistymuffs-we-fight.json, Tests/PorterCoreTests/Fixtures/services/mb-release-search-fontaines-dopamine-chamber.json, Tests/PorterCoreTests/Fixtures/services/mb-release-search-kneecap-fenian.json)
+semantic blind spots: warn (7 files skipped (tree-sitter syntax error nodes present: error ERROR at line 31 column 9 near "#expect"): Tests/PorterAppTests/AppSettingsTests.swift, Tests/PorterCoreTests/Audio/AlbumProcessorResponsivenessTests.swift, Tests/PorterCoreTests/Matching/CandidateFinderStateTests.swift, Tests/PorterCoreTests/Matching/CandidateFinderTests.swift, Tests/PorterCoreTests/Matching/TrackReassignTests.swift, Tests/PorterCoreTests/Output/AlbumPlacerTests.swift, Tests/PorterCoreTests/Tagging/PicardMapperTests.swift)
+semantic blind spots: warn (7 files skipped (tree-sitter syntax error nodes present: error ERROR at line 10 column 9 near "#expect"): Tests/PorterAppTests/MainWindowLayoutTests.swift, Tests/PorterCLITests/ExclusionTests.swift, Tests/PorterCoreTests/Audio/FLACDecoderTests.swift, Tests/PorterCoreTests/MusicBrainz/ReleaseModelTests.swift, Tests/PorterCoreTests/Tagging/FixtureTests.swift, Tests/PorterCoreTests/Tagging/ID3ReaderTests.swift, Tests/PorterCoreTests/Tagging/TagSetTests.swift)
+semantic blind spots: warn (6 files skipped (tree-sitter syntax error nodes present: error ERROR at line 25 column 9 near "#expect"): Tests/PorterAppTests/ReviewPresentationTests.swift, Tests/PorterCLITests/PlanReportTests.swift, Tests/PorterCoreTests/Audio/AlbumProcessorConcurrencyTests.swift, Tests/PorterCoreTests/Source/FileNameHintTests.swift, Tests/PorterCoreTests/Submission/QueueStatusTests.swift, Tests/PorterCoreTests/Tagging/GenresTests.swift)
+semantic blind spots: warn (5 files skipped (tree-sitter syntax error nodes present: error ERROR at line 9 column 9 near "#expect"): Tests/PorterCoreTests/CoverArt/CoverImageProcessorTests.swift, Tests/PorterCoreTests/Disc/CueSheetTests.swift, Tests/PorterCoreTests/Disc/LegacyTextTests.swift, Tests/PorterCoreTests/Services/ServiceFixtureTests.swift, Tests/PorterCoreTests/Source/FLACMetadataTests.swift)
+semantic blind spots: warn (4 files skipped (tree-sitter syntax error nodes present: error ERROR at line 38 column 9 near "#expect"): Tests/PorterAppTests/AppModelProgressTests.swift, Tests/PorterAppTests/AppModelReviewTests.swift, Tests/PorterAppTests/QueuePresentationTests.swift, Tests/PorterCoreTests/Submission/SubmissionQueueLockTests.swift)
+semantic blind spots: warn (4 files skipped (tree-sitter syntax error nodes present: error ERROR at line 24 column 9 near "#expect"): Tests/PorterAppTests/AppModelSavingTests.swift, Tests/PorterCLITests/ConfigurationTests.swift, Tests/PorterCoreTests/CoverArt/CoverArtArchiveTests.swift, Tests/PorterCoreTests/Matching/CandidateFinderProgressTests.swift)
+semantic blind spots: warn (4 files skipped (tree-sitter syntax error nodes present: error ERROR at line 21 column 9 near "#expect"): Tests/PorterAppTests/TimeoutTests.swift, Tests/PorterCoreTests/Audio/AlbumProcessorTests.swift, Tests/PorterCoreTests/Matching/CandidateFinderFailureTests.swift, Tests/PorterCoreTests/Tagging/MissingFieldsTests.swift)
+semantic blind spots: warn (4 files skipped (tree-sitter syntax error nodes present: error ERROR at line 20 column 9 near "#expect"): Tests/PorterCLITests/SubmissionsCommandTests.swift, Tests/PorterCoreTests/Audio/LameEncoderTests.swift, Tests/PorterCoreTests/Jobs/TagDiffTests.swift, Tests/PorterCoreTests/Tagging/PicardTextTests.swift)
+semantic blind spots: warn (3 files skipped (tree-sitter syntax error nodes present: error ERROR at line 29 column 9 near "#expect"): Tests/PorterAppTests/AppModelPreflightTests.swift, Tests/PorterAppTests/AppModelSubmissionTests.swift, Tests/PorterCoreTests/CoverArt/CoverArtSelectorTests.swift)
+semantic blind spots: warn (3 files skipped (tree-sitter syntax error nodes present: error ERROR at line 37 column 9 near "#expect"): Tests/PorterAppTests/CandidateTableTests.swift, Tests/PorterCoreTests/Output/AlbumPlacerDeviceTests.swift, Tests/PorterCoreTests/Submission/SubmissionPlannerTests.swift)
+semantic blind spots: warn (3 files skipped (tree-sitter syntax error nodes present: error ERROR at line 15 column 9 near "#expect"): Tests/PorterAppTests/ReturnShortcutTests.swift, Tests/PorterCoreTests/Matching/TrackMappingShareTests.swift, Tests/PorterCoreTests/Tagging/ID3WriterTests.swift)
+semantic blind spots: warn (3 files skipped (tree-sitter syntax error nodes present: error ERROR at line 16 column 9 near "#expect"): Tests/PorterCoreTests/Disc/DiscTOCTests.swift, Tests/PorterCoreTests/Matching/TrackFingerprinterTests.swift, Tests/PorterCoreTests/Output/CommitterProgressTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 28 column 9 near "#expect"): Tests/PorterAppTests/AppModelLifecycleTests.swift, Tests/PorterAppTests/TrackChoicesTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 36 column 9 near "#expect"): Tests/PorterAppTests/AppModelStagingRootTests.swift, Tests/PorterCoreTests/Matching/TrackMapperTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 13 column 9 near "#expect"): Tests/PorterAppTests/CoverIdentityTests.swift, Tests/PorterCoreTests/Output/CommitterTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 8 column 9 near "#expect"): Tests/PorterAppTests/CoverPresentationTests.swift, Tests/PorterCoreTests/Jobs/WorkProgressTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 28 column 24 near "#require"): Tests/PorterAppTests/Fakes.swift, Tests/PorterCoreTests/Services/MusicBrainzClientTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 30 column 9 near "#expect"): Tests/PorterAppTests/SavingProgressTests.swift, Tests/PorterCoreTests/Submission/SubmissionQueueCountsTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 17 column 9 near "#expect"): Tests/PorterCoreTests/Matching/JobClusterTests.swift, Tests/PorterCoreTests/Matching/ReleaseReferenceTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 41 column 9 near "#expect"): Tests/PorterCoreTests/Output/PreflightTests.swift, Tests/PorterCoreTests/Tagging/ArtistCreditsTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 38 column 13 near "#require"): Tests/PorterCoreTests/Services/CoverArtClientTests.swift, Tests/PorterCoreTests/Submission/AcoustIDSubmitTests.swift)
+semantic blind spots: warn (2 files skipped (tree-sitter syntax error nodes present: error ERROR at line 55 column 9 near "#expect"): Tests/PorterCoreTests/Source/FolderHintsTests.swift, Tests/PorterCoreTests/Submission/SubmissionQueueTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 131 column 16 near "throws"): Sources/PorterApp/Model/AppModel+Intake.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 42 column 69 near ")"): Sources/PorterCLI/PlanCommand.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 1 column 1 near "import Foundation\nimport PorterCore\n\nenum SubmissionsCommand {\n    static func d..."): Sources/PorterCLI/SubmissionsCommand.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 95 column 52 near "final"): Sources/PorterCore/Jobs/ReviewSummary.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 1 column 1 near "import Foundation\n\npublic enum CandidateSource: String, Sendable {\n    case disc..."): Sources/PorterCore/Matching/CandidateFinder.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 25 column 47 near "/^(.+?)"): Sources/PorterCore/Matching/ReleaseReference.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 250 column 86 near "1,"): Sources/PorterCore/Matching/ReleaseScorer.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 3 column 1 near "public struct CoverArtClient: Sendable {\n    private static let base = \"https://..."): Sources/PorterCore/Services/CoverArtClient.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 14 column 49 near "1,"): Sources/PorterCore/Source/FileNameHint.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 1 column 1 near "import Foundation\n\npublic struct SubmissionEntry: Codable, Sendable, Equatable {..."): Sources/PorterCore/Submission/SubmissionQueue.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 177 column 67 near "\\/[^\\/"): Sources/PorterCore/Tagging/ID3Frames.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 27 column 9 near "#expect"): Tests/PorterAppTests/AppModelAddReleaseTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 33 column 9 near "#expect"): Tests/PorterAppTests/AppModelCoverRefetchTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 39 column 9 near "#expect"): Tests/PorterAppTests/AppModelIntakeTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 36 column 28 near "#require"): Tests/PorterAppTests/AppModelLocalCoverTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 43 column 9 near "#expect"): Tests/PorterAppTests/AppModelQueueStatusTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 24 column 28 near "#require"): Tests/PorterAppTests/AppModelReloadTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 23 column 9 near "#expect"): Tests/PorterAppTests/AppModelScanTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 14 column 20 near "#require"): Tests/PorterAppTests/BundleTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 15 column 29 near "#require"): Tests/PorterAppTests/CoverThumbnailTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 31 column 13 near "#expect"): Tests/PorterAppTests/JobActionsTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 108 column 13 near "#expect"): Tests/PorterAppTests/PresentationTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 14 column 9 near "#expect"): Tests/PorterAppTests/ReviewSectionsPresentationTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 62 column 9 near "#expect"): Tests/PorterAppTests/SavingRig.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 11 column 29 near "#require"): Tests/PorterCLITests/CachingTransportTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 13 column 26 near "#require"): Tests/PorterCLITests/SaveArgumentsTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 24 column 15 near "#expect"): Tests/PorterCLITests/VerifyMappingTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 11 column 9 near "#expect"): Tests/PorterCoreTests/Audio/FingerprinterTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 19 column 9 near "#expect"): Tests/PorterCoreTests/Audio/TrackProcessorTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 15 column 27 near "#require"): Tests/PorterCoreTests/CoverArt/TestImages.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 53 column 23 near "#require"): Tests/PorterCoreTests/Disc/DiscIDResolverTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 20 column 23 near "#require"): Tests/PorterCoreTests/Disc/RipLogTOCTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 15 column 16 near ":"): Tests/PorterCoreTests/Fixtures/disc/kneecap.cue)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 7 column 9 near "#expect"): Tests/PorterCoreTests/FixturesTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 88 column 25 near "#require"): Tests/PorterCoreTests/Jobs/JobAnalyzerTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 54 column 9 near "#expect"): Tests/PorterCoreTests/Jobs/ReviewDraftTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 58 column 9 near "#expect"): Tests/PorterCoreTests/Jobs/ReviewSummaryTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 42 column 9 near "#expect"): Tests/PorterCoreTests/Matching/CandidateFinderEvidenceTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 40 column 9 near "#expect"): Tests/PorterCoreTests/Matching/ManualCandidateTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 6 column 5 near "private func expect(_ actual: Double, _ expected: Double, at location: SourceLoc..."): Tests/PorterCoreTests/Matching/ReleaseScorerFormulaTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 15 column 5 near "private func expect(_ actual: Double?, _ expected: Double, at location: SourceLo..."): Tests/PorterCoreTests/Matching/ReleaseScorerTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 8 column 5 near "private func expect(_ actual: Double, _ expected: Double, at location: SourceLoc..."): Tests/PorterCoreTests/Matching/SimilarityTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 45 column 24 near "#require"): Tests/PorterCoreTests/Matching/TrackMapperPregapTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 12 column 26 near "#require"): Tests/PorterCoreTests/MusicBrainz/ReleaseTrackLookupTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 6 column 5 near "#expect"): Tests/PorterCoreTests/NativeLibrariesTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 29 column 25 near "#require"): Tests/PorterCoreTests/Output/AlbumAssemblerTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 12 column 9 near "#expect"): Tests/PorterCoreTests/Output/CommitterRetryTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 6 column 1 near "struct OutputMessagesTests {\n    @Test func everyPreflightErrorHasCopy() {\n     ..."): Tests/PorterCoreTests/Output/OutputMessagesTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 26 column 9 near "#expect"): Tests/PorterCoreTests/Output/ReviewTagsTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 18 column 9 near "#expect"): Tests/PorterCoreTests/Output/StagingAreaTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 9 column 13 near "#require"): Tests/PorterCoreTests/Output/StagingLocksTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 30 column 24 near "#require"): Tests/PorterCoreTests/Services/AcoustIDClientTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 6 column 9 near "#expect"): Tests/PorterCoreTests/Services/LuceneQueryTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 15 column 25 near "#require"): Tests/PorterCoreTests/Services/PorterServicesTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 29 column 13 near "#require"): Tests/PorterCoreTests/Services/ServiceClientCacheTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 45 column 9 near "#expect"): Tests/PorterCoreTests/Services/ServiceClientTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 9 column 28 near "#require"): Tests/PorterCoreTests/Settings/PorterSettingsTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 32 column 9 near "#expect"): Tests/PorterCoreTests/Source/SourceScannerTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 47 column 9 near "#expect"): Tests/PorterCoreTests/Submission/SubmissionQueueFailureTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 39 column 27 near "#require"): Tests/PorterCoreTests/Submission/SubmissionQueueGatedTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 47 column 25 near "#require"): Tests/PorterCoreTests/Submission/SubmissionQueueLegacyTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 24 column 75 near "= #_sourceLocation"): Tests/PorterCoreTests/Support/FinderHarness.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 74 column 9 near "#expect"): Tests/PorterCoreTests/Tagging/FileNamerTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 18 column 13 near "#require"): Tests/PorterCoreTests/Tagging/MapperConformanceTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 12 column 25 near "#require"): Tests/PorterCoreTests/Tagging/PicardMapperPregapTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 15 column 13 near "#require"): Tests/PorterCoreTests/Tagging/RealAlbumGoldenTests.swift)
+semantic blind spots: warn (1 file skipped (tree-sitter syntax error nodes present: error ERROR at line 48 column 9 near "#expect"): Tests/PorterCoreTests/Tagging/RelationshipsTests.swift)
+semantic: warn (degraded: semantic_completeness=degraded (140 partial failures in 34% of files))
+semantic provider: ok (entire-graph v0.4.0)
+</pasted_content id="2a74">
+
+---
+
+Yes, please do.
+
+---
+
+I've rebuilt the HEAD versions of entire-graph and entire-brain and installed them, so calls to `entire brain` or `entire graph` go through them now.
+
+Regarding the tree-sitter code -- how many files are we talking about copying over for the Swift parser?  It seems like a bad idea to special case swift in this way.  I think I'd rather have a build-time way to update the Swift parser within the go-tree-sitter repo, or just go with a straight fork, since there may be other languages that would benefit from being refreshed.
+
+---
+
+yes, manifest plus refresh script with Swift first
+
+---
+
+Accept a few regressions if they're reported honestly.
+
+Before carrying on, using Entire, are you able to see the session details when the "Promote X from inventory to the semantic tier" commits were made?  If so, does that give increase or decrease your confidence that this is the right approach?
+
+---
+
+From a read of the commits and the languages specified, it looks like they're ones that smacker's repo didn't already support.  So this would be the first time we're _overriding_ a language from that repo.
+
+Don't write the superpowers docs to this folder.  Keep them in your scratchpad.
+
+---
+
+That's fine.  Porter is private, but it's not Top Secret.  It's OK if filenames or details leak about it.
+
+I've forked entire-graph into my personal account, so you will be able to push a branch there later. https://github.com/rodbegbie/entire-graph
+
+---
+
+Re 3: it looks like the details for the origin of those grammars are in the commit messages.
+
+One note: If you look at PR 21 in the entire-graph repo, you can see more details about the design and testing (and commit message formatting) used by this project.
+
+Also, the Benchmark claim -- the Swift repos in there are probably better sources of finding issues or regressions than the ones I picked (firefox, etc).  So use them as the source of truth.
+
+Sounds good?
+
+---
+
+OK, let's do this native.
+
+---
+
+<task-notification>
+<task-id>bpz9isas7</task-id>
+<tool-use-id>toolu_01HohkRefXB1Vrod72J3zeD4</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/bpz9isas7.output</output-file>
+<status>completed</status>
+<summary>Background command "Run baseline full test suite" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>bjfyw1t38</task-id>
+<tool-use-id>toolu_01XMcNd8R11kSAViJ37ALMcs</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/bjfyw1t38.output</output-file>
+<status>completed</status>
+<summary>Background command "Run full internal/sem tests with new grammar" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>b5vvwbtqo</task-id>
+<tool-use-id>toolu_013ctVcQnFR3fahhT1zVwnTu</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/b5vvwbtqo.output</output-file>
+<status>completed</status>
+<summary>Background command "Run baseline Swift benchmark on main" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>bx4yfglhs</task-id>
+<tool-use-id>toolu_01HuwcS6rM9UAXe3SoMJyPkh</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/bx4yfglhs.output</output-file>
+<status>completed</status>
+<summary>Background command "Rerun full internal/sem tests" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>b3tbvkvjm</task-id>
+<tool-use-id>toolu_018qc3KfgWSuc1tH1YaimBwS</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/b3tbvkvjm.output</output-file>
+<status>completed</status>
+<summary>Background command "Measure per-file Swift failures on bench repos with main" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>bmxfvd10x</task-id>
+<tool-use-id>toolu_01PhLh5w3fAXGnMp1f6kajzw</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/bmxfvd10x.output</output-file>
+<status>completed</status>
+<summary>Background command "Find which files lose Swift symbols after the swap" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>b1v7ib1n5</task-id>
+<tool-use-id>toolu_0194jELPUr9QLNinA8mxp3Ss</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/b1v7ib1n5.output</output-file>
+<status>completed</status>
+<summary>Background command "Measure per-file Swift failures on bench repos with swap" completed (exit code 0)</summary>
+</task-notification>
