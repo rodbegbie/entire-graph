@@ -1,0 +1,15 @@
+{
+  "tool_use_id": "toolu_01L2CxN3JCoYZcwUSF8NcU7Q",
+  "agent_id": "a3149e1fe282c3bb8",
+  "subagent_type": "general-purpose",
+  "task_description": "Builder check on design doc",
+  "token_usage": {
+    "input_tokens": 28,
+    "cache_creation_tokens": 75842,
+    "cache_read_tokens": 828104,
+    "output_tokens": 115,
+    "api_call_count": 14
+  },
+  "started_at": "2026-10-21T15:12:51.273881-07:00",
+  "completed_at": "2026-10-21T15:15:29.401181-07:00"
+}
