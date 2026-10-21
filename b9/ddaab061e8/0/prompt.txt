@@ -1,0 +1,114 @@
+What version of tree-sitter is used in this repo?  How recently has the dependency been updated?
+
+---
+
+/using-entire What versions of Swift code does tree-sitter support
+
+---
+
+Has upstream go-tree-sitter updated their Swift grammer since the currently pinned version?
+
+---
+
+how different are the official go-tree-sitter and smacker/go-tree-sitter?
+
+---
+
+Take a look at the Swift project in @../shunter/ -- how many .swift files there would have trouble being parsed by this app?
+
+---
+
+Yes, I'm curious if tree-sitter-swift is up to date.
+
+---
+
+Using rod-voice can you write me a draft issue that I could file on the entire-graph repo?
+
+---
+
+It looks like go-tree-sitter has automation to update grammers.  Would a fork of that library which had the updater run on it be likely to work?
+
+---
+
+Yes, try running this repo's tests against the fork
+
+---
+
+Yes, figure out the reason for the 6 extra failurs.
+
+---
+
+yes, update the issue draft.
+
+---
+
+read the upstream issues to make sure they're accurate pointers
+
+---
+
+No, let's focus on filing an issue on entire-graph.
+
+---
+
+Shunter is private.  You can describe it as a "personal modern macOS app"
+
+---
+
+File names and code exceperts are fine if they provide useful context to a reader who can't see them
+
+---
+
+3
+
+---
+
+I'm not a contributor to the entire-graph project, just an end user, so make this write-up more of a request with data, rather than a task I'm proposing working on.
+
+---
+
+And don't file the issue yourself. I'll handle that when I'm happy with it.
+
+---
+
+Let's try taking my personal project out of the data (though we can acknowledge that that's how I found these issues).  THere's a popular open-source Swift app at https://github.com/hummingbird-project/hummingbird -- Let's compare the before and after on it, since that's a benchmark that anyone can run.  Use the latest release tag (v2.28.0) for consistency's sake.
+
+---
+
+Let's look at tag v3.4.3 of https://github.com/OnionBrowser/OnionBrowser too and build up more of a case.
+
+---
+
+Another: https://github.com/mozilla-mobile/firefox-ios tag firefox-v158.0
+
+---
+
+The title could just become "Swift: stale grammar and a mask rule cause parse errors".
+
+Some other notes:
+1. We've lost the guidance that the aging `go-tree-sitter` is the root cause, and the instruction on how simple it is to upgrade.    The paragraph beginnging "The pinned `smacker/go-tree-sitter`
+(`v0.0.0-20240827094217-dd81d9e9be82`) bundles a Swift parser…" is the headline and should be pulled into the Request section, rather than being buried in the Benchmarks.
+2. Similarly, the guidance on how easy it could be to upgrade the grammar (it's a one-liner `go run ./_automation/main.go update swift` command) needs to be very visible.  This is much less work that it sounds at first!
+
+---
+
+In the opening disclaimer, say that "Rod reviewed and collaborated on this draft before it was posted"
+
+---
+
+Include percentages for all the entries in the "Swift files failing" table.
+
+---
+
+Can you put <details> and <summary> tags around the "What still fails on the refreshed grammar" and "How to reproduce" sections, since they're quite detailed.
+
+---
+
+ok, i've reviewed. Please open the issue.
+
+---
+
+end session
+
+---
+
+clean up the worktrees and scratchpads
