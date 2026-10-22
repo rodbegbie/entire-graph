@@ -1,0 +1,30 @@
+{
+  "cli_version": "0.12.0",
+  "checkpoint_id": "100f34f4c9ab",
+  "strategy": "manual-commit",
+  "branch": "fix/345-swift-grammar-refresh",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "CONTRIBUTING.md",
+    "cmd/grammar-refresh/main.go",
+    "cmd/grammar-refresh/refresh.go",
+    "cmd/grammar-refresh/refresh_test.go",
+    "internal/sem/grammars/grammars.json"
+  ],
+  "sessions": [
+    {
+      "metadata": "/10/0f34f4c9ab/0/metadata.json",
+      "transcript": "/10/0f34f4c9ab/0/full.jsonl",
+      "compact_transcript": "/10/0f34f4c9ab/0/transcript.jsonl",
+      "content_hash": "/10/0f34f4c9ab/0/content_hash.txt",
+      "prompt": ""
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 52,
+    "cache_creation_tokens": 36288,
+    "cache_read_tokens": 9022266,
+    "output_tokens": 25553,
+    "api_call_count": 26
+  }
+}
