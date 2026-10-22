@@ -1,0 +1,26 @@
+{
+  "cli_version": "0.12.0",
+  "checkpoint_id": "e51fe46d3e43",
+  "strategy": "manual-commit",
+  "branch": "fix/345-swift-grammar-refresh",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "CHANGELOG.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/e5/1fe46d3e43/0/metadata.json",
+      "transcript": "/e5/1fe46d3e43/0/full.jsonl",
+      "compact_transcript": "/e5/1fe46d3e43/0/transcript.jsonl",
+      "content_hash": "/e5/1fe46d3e43/0/content_hash.txt",
+      "prompt": ""
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 8,
+    "cache_creation_tokens": 5256,
+    "cache_read_tokens": 1460046,
+    "output_tokens": 2739,
+    "api_call_count": 4
+  }
+}
