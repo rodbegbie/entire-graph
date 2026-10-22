@@ -1,0 +1,27 @@
+<task-notification>
+<task-id>b5mlmzjg1</task-id>
+<tool-use-id>toolu_01XgFYVK1E4hbdjcASh7FwRv</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/b5mlmzjg1.output</output-file>
+<status>completed</status>
+<summary>Background command "Measure each disabled-mask variant" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>bbom773e6</task-id>
+<tool-use-id>toolu_01KKcV8NDKfZ1tzqgtNuizmR</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/bbom773e6.output</output-file>
+<status>completed</status>
+<summary>Background command "Measure the three removable masks disabled together" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>bq6vvmd3k</task-id>
+<tool-use-id>toolu_01PLw7ZtxcZzWmkZgmVAAAaD</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/7bfdd797-ea5f-4338-80e4-17ab056773fd/tasks/bq6vvmd3k.output</output-file>
+<status>completed</status>
+<summary>Background command "Run full internal/sem tests for Task 5" completed (exit code 0)</summary>
+</task-notification>
