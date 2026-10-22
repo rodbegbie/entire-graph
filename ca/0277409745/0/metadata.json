@@ -250,6 +250,37 @@
         "label": "Skill: rod-voice",
         "default_collapsed": true
       }
+    },
+    {
+      "id": "claude-skill-toolu_019ySte1zQyDtEEvDr6vAYpP",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "superpowers:finishing-a-development-branch"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "949d46ec76b0",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 3289,
+        "end": 3290,
+        "entry_ids": [
+          "04e759be-4adc-4f19-ad87-01724875c0a9"
+        ],
+        "tool_use_id": "toolu_019ySte1zQyDtEEvDr6vAYpP"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_019ySte1zQyDtEEvDr6vAYpP"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: superpowers:finishing-a-development-branch",
+        "default_collapsed": true
+      }
     }
   ],
   "session_metrics": {
