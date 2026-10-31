@@ -1,0 +1,79 @@
+{
+  "cli_version": "0.12.2",
+  "checkpoint_id": "b2b59ccf56e7",
+  "strategy": "manual-commit",
+  "branch": "throwaway/rust-grammar-refresh",
+  "checkpoints_count": 4,
+  "files_touched": [
+    "internal/sem/grammars/grammars.json",
+    "internal/sem/grammars/rust/LICENSE",
+    "internal/sem/grammars/rust/binding.go",
+    "internal/sem/grammars/rust/parser.c",
+    "internal/sem/grammars/rust/scanner.c",
+    "internal/sem/grammars/rust/tree_sitter/alloc.h",
+    "internal/sem/grammars/rust/tree_sitter/array.h",
+    "internal/sem/grammars/rust/tree_sitter/parser.h",
+    "internal/sem/identity_revision_test.go",
+    "internal/sem/parser.go",
+    "internal/sem/provider.go",
+    "internal/sem/testdata/fixtures/csharp-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/csharp-fields.ndjson.golden",
+    "internal/sem/testdata/fixtures/csharp-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-async.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-clones.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-fields.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-tests.ndjson.golden",
+    "internal/sem/testdata/fixtures/go-types.ndjson.golden",
+    "internal/sem/testdata/fixtures/java-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/java-fields.ndjson.golden",
+    "internal/sem/testdata/fixtures/java-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/julia-r-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/multilang-relations.ndjson.golden",
+    "internal/sem/testdata/fixtures/php-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/php-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/python-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/python-imports.ndjson.golden",
+    "internal/sem/testdata/fixtures/python-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/rust-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/rust-oo.ndjson.golden",
+    "internal/sem/testdata/fixtures/services-config.ndjson.golden",
+    "internal/sem/testdata/fixtures/terraform-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-basic.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-events.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-fields.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-http.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-imports.ndjson.golden",
+    "internal/sem/testdata/fixtures/typescript-oo.ndjson.golden"
+  ],
+  "sessions": [
+    {
+      "metadata": "/b2/b59ccf56e7/0/metadata.json",
+      "transcript": "/b2/b59ccf56e7/0/full.jsonl",
+      "compact_transcript": "/b2/b59ccf56e7/0/transcript.jsonl",
+      "content_hash": "/b2/b59ccf56e7/0/content_hash.txt",
+      "prompt": "/b2/b59ccf56e7/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 110,
+    "cache_creation_tokens": 51042,
+    "cache_read_tokens": 7640776,
+    "output_tokens": 30845,
+    "api_call_count": 51
+  },
+  "redaction": {
+    "replacements": 0,
+    "layers": {
+      "betterleaks": 0,
+      "connection_string": 0,
+      "credential_key": 0,
+      "credential_value": 0,
+      "credentialed_uri": 0,
+      "entropy": 0,
+      "key_context": 0,
+      "provider_token": 0,
+      "shell_stdin": 0
+    }
+  }
+}
