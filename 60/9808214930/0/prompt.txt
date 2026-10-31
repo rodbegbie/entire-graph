@@ -1,0 +1,15 @@
+how old is v0.23.3  vs v0.24.1?
+
+---
+
+For fun, let's see what would happen to the statistics if we tried generating 0.24.2 as ABI 14/
+
+---
+
+<task-notification>
+<task-id>b7fw5gy23</task-id>
+<tool-use-id>toolu_01A2hDgF6HUD7f6vUfNq7Lfe</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/48f61007-a9b1-4eb7-8a60-0e58909e2028/tasks/b7fw5gy23.output</output-file>
+<status>completed</status>
+<summary>Background command "Run Rust benchmark with ABI 14 v0.24.2 grammar" completed (exit code 0)</summary>
+</task-notification>
