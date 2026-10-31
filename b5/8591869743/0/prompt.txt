@@ -1,0 +1,33 @@
+Fix my #345 branch so it can be merged cleanly onto main.
+
+---
+
+Yes, push it, and update the PR description with some of this information (since the maintainer just did a task by hand that this script automates)
+
+---
+
+Use the GH token that's stored in the keychain by `gh` rather than the one in the `GH_TOKEN` env var.
+
+---
+
+instead of this custom stuff, could we instead use the .automatic formstyle instead of grouped?  That would be simpler, and be more Mac-like.
+
+---
+
+oops. wrong window! Ignore that!
+
+---
+
+OK, for this one, ignore my suggestion about the maintainer line. I'd misunderstood another PR and thought that the maintainer had just updated a tree-sitter grammar.
+
+---
+
+show me the diff with hunk
+
+---
+
+Hmm… What would be the downside of rebasing the branch?  I'm thinking that rewriting the commits to be cleaner will be easier for folks to understand (and cherry-pick if they want the Swift improvements but not the grammar updating command)
+
+---
+
+Yes, go ahead with the rebase
