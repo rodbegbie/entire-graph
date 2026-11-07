@@ -1,0 +1,51 @@
+The PR I worked on to update the Swift grammar was merged https://github.com/entireio/entire-graph/pull/357.  One of the maintainers, Tom, made some changes to allow for specifying patches to the grammar before it is compiled and added to the vendored folder.
+
+In a comment, I suggested that the grammar-refresh command could be updated to apply the patch and regenerate the grammar.  In addition, it would be useful for updating grammars which now ship without ABI 14 compatible files in their repo.
+
+So let's brainstorm implementing that.  I have installed the `tree-sitter-cli` homebrew package.  The practical test cases for this working would be 1) applying the swift patch to a clean copy of the tree-sitter-swift grammar as descriped in the new manifest file, and 2) building and adding the tree-sitter-rust grammar at v0.24.2 to the vendored folder.  (We shouldn't commit any grammar changes on this branch -- just validate that it works correctly.)
+
+---
+
+C.  The manifest file could change local_changes to be a pointer to the patch file.
+
+Perhaps "local_changes" could be replaced by a local_generation field which maps to a dictionary of "tree-sitter-cli-version", "tree-sitter-cli-switches" and "patch-file"?
+
+---
+
+Let's not move F# now.  That can be a follow-up.
+
+Also, I think it's fine to use tree-sitter-cli@latest when we're generating from a different ref than the one in the manifest, and store its version.  Its not important to keep the version of tree-sitter-cli constant when we're updating the grammar.  It's just useful to validate when *re-generating* an existing grammar.
+
+---
+
+This looks good.  The risk with @latest and ABI versions is noted.  Perhaps something to drop into a README (along with the need for `node` to be installed)
+
+---
+
+Don't worry about safe-chain. That's just something local to me.  Most developers won't have it installed.
+
+---
+
+Approved.
+
+---
+
+Execute native
+
+---
+
+Let's use the gh-stack skill and make this the first stage of a stack of PRs.  The second stage would be to fix up F# and remove the local_changes flag and manifest entry.  The third would be a commit that demonstrates this working and updates the Rust grammar.
+
+---
+
+<task-notification>
+<task-id>bopbl311h</task-id>
+<tool-use-id>toolu_01Y9y9updgfqCUSD2o55C5Ge</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/25be978d-7a70-4adc-9b09-1bae9ecaf35c/tasks/bopbl311h.output</output-file>
+<status>completed</status>
+<summary>Background command "Run fmt, vet, race tests and build" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+Stack the PRs in my fork.  We can work out what the right way is to deliver them to the upstream later.
