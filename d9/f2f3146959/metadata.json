@@ -1,0 +1,51 @@
+{
+  "cli_version": "0.13.1",
+  "checkpoint_id": "d9f2f3146959",
+  "strategy": "manual-commit",
+  "branch": "feature/grammar-refresh-local-build",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "CONTRIBUTING.md",
+    "cmd/grammar-refresh/generate.go",
+    "cmd/grammar-refresh/generate_test.go",
+    "cmd/grammar-refresh/main.go",
+    "internal/sem/grammars/swift/README.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/d9/f2f3146959/0/metadata.json",
+      "transcript": "/d9/f2f3146959/0/full.jsonl",
+      "compact_transcript": "/d9/f2f3146959/0/transcript.jsonl",
+      "content_hash": "/d9/f2f3146959/0/content_hash.txt",
+      "prompt": "/d9/f2f3146959/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 60,
+    "cache_creation_tokens": 29280,
+    "cache_read_tokens": 6039277,
+    "output_tokens": 16408,
+    "api_call_count": 28,
+    "subagent_tokens": {
+      "input_tokens": 18,
+      "cache_creation_tokens": 68913,
+      "cache_read_tokens": 469996,
+      "output_tokens": 2085,
+      "api_call_count": 9
+    }
+  },
+  "redaction": {
+    "replacements": 0,
+    "layers": {
+      "betterleaks": 0,
+      "connection_string": 0,
+      "credential_key": 0,
+      "credential_value": 0,
+      "credentialed_uri": 0,
+      "entropy": 0,
+      "key_context": 0,
+      "provider_token": 0,
+      "shell_stdin": 0
+    }
+  }
+}
