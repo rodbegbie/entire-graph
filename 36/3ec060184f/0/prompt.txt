@@ -1,0 +1,7 @@
+<task-notification>
+<task-id>b61x2irvo</task-id>
+<tool-use-id>toolu_01KGU9zv9YnWtrKWifQZK5io</tool-use-id>
+<output-file>/private/tmp/claude-502/-Users-rod-build-entire-graph/25be978d-7a70-4adc-9b09-1bae9ecaf35c/tasks/b61x2irvo.output</output-file>
+<status>completed</status>
+<summary>Background command "Re-run the slow exact-name search tests without race" completed (exit code 0)</summary>
+</task-notification>
