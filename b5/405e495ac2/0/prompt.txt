@@ -1,0 +1,25 @@
+I said 10, you merged 3. Huh?
+
+---
+
+Give me them one-by-one, but make sure you already reviewed all eval comments.
+
+---
+
+Address the open finding
+
+---
+
+Skip 102 for now. 213 has merge conflicts, address those.
+
+---
+
+Ok, next 221
+
+---
+
+Ok, we wait. What other PRs are open that don't have a trail?
+
+---
+
+Review those 10 for readiness and supersession, then work through them one by one like the trails. Do not automatically merge. Before you push any commits, judge whether the feature makes sense for entire-graph or belongs into entire-brain or into the CLI itself. Also, always provide a link to the PR.
